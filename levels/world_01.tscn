@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b3krm4gysjt7s"]
+[gd_scene load_steps=25 format=3 uid="uid://b3krm4gysjt7s"]
 
 [ext_resource type="Script" path="res://scripts/world_01.gd" id="1_fj6ri"]
 [ext_resource type="Texture2D" uid="uid://bgw388cxl2m6p" path="res://assets/Seasonal Tilesets/1 - Grassland/Terrain (16 x 16).png" id="1_qx005"]
@@ -13,6 +13,12 @@
 [ext_resource type="Texture2D" uid="uid://dk84c2vxx0m1m" path="res://assets/Seasonal Tilesets/1 - Grassland/Background parts/1 - Foreground_scenery.png" id="8_3egik"]
 [ext_resource type="PackedScene" uid="uid://wbiqipgg1wwq" path="res://prefabs/moving_platform.tscn" id="10_edgyo"]
 [ext_resource type="PackedScene" uid="uid://bppylwa07edv5" path="res://actors/enemy.tscn" id="12_7joh7"]
+[ext_resource type="Texture2D" uid="uid://bsvuypsekmw2g" path="res://assets/Extras/ui_buttons_arrow_left_NORMAL.png" id="14_hvplv"]
+[ext_resource type="Texture2D" uid="uid://dh66m14gtiw6i" path="res://assets/Extras/ui_buttons_arrow_left_PRESSED.png" id="15_lv63i"]
+[ext_resource type="Texture2D" uid="uid://dpjfp7lduf1tl" path="res://assets/Extras/ui_buttons_arrow_right_NORMAL.png" id="16_jcped"]
+[ext_resource type="Texture2D" uid="uid://cnvot8an724m8" path="res://assets/Extras/ui_buttons_arrow_right_PRESSED.png" id="17_q7447"]
+[ext_resource type="Texture2D" uid="uid://8p0llgfd3msn" path="res://assets/Extras/ui_buttons_arrow_up_NORMAL.png" id="18_sbhw6"]
+[ext_resource type="Texture2D" uid="uid://e2muqv0hr0ng" path="res://assets/Extras/ui_buttons_arrow_up_PRESSED.png" id="19_tjryk"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_uvaoy"]
 tile_data = PackedInt32Array(0, 65538, 1, 4, 327682, 1, 8, 65538, 1)
@@ -268,6 +274,7 @@ layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array(458737, 65538, 1, 393223, 65538, 1, 393227, 327682, 1, 393231, 65538, 1)
 
 [node name="BG" type="ParallaxBackground" parent="."]
+visible = false
 
 [node name="05" type="ParallaxLayer" parent="BG"]
 position = Vector2(6, -58)
@@ -358,7 +365,6 @@ moving_horizontally = false
 position = Vector2(38, 223)
 
 [node name="Camera" type="Camera2D" parent="."]
-visible = false
 limit_left = -16
 limit_smoothed = true
 editor_draw_limits = true
@@ -376,3 +382,26 @@ position = Vector2(128, 139)
 
 [node name="Enemy4" parent="Enemies" instance=ExtResource("12_7joh7")]
 position = Vector2(205, 200)
+
+[node name="Controls" type="CanvasLayer" parent="."]
+
+[node name="UI_Left" type="TouchScreenButton" parent="Controls"]
+position = Vector2(10, 120)
+texture_normal = ExtResource("14_hvplv")
+texture_pressed = ExtResource("15_lv63i")
+action = "ui_left"
+visibility_mode = 1
+
+[node name="UI_Right" type="TouchScreenButton" parent="Controls"]
+position = Vector2(45, 120)
+texture_normal = ExtResource("16_jcped")
+texture_pressed = ExtResource("17_q7447")
+action = "ui_right"
+visibility_mode = 1
+
+[node name="UI_Jump" type="TouchScreenButton" parent="Controls"]
+position = Vector2(280, 120)
+texture_normal = ExtResource("18_sbhw6")
+texture_pressed = ExtResource("19_tjryk")
+action = "ui_accept"
+visibility_mode = 1

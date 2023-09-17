@@ -15,17 +15,21 @@ var knockback_vector := Vector2.ZERO
 @onready var ray_left := $Ray_Left as RayCast2D
 
 
+func jump_common():
+	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+		velocity.y = JUMP_FORCE
+		is_jumping = true
+	elif is_on_floor():
+		is_jumping = false
+
+
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
 	# Handle Jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_FORCE
-		is_jumping = true
-	elif is_on_floor():
-		is_jumping = false
+	jump_common()
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -72,3 +76,8 @@ func take_damage(knockback_force := Vector2.ZERO, duration := 0.25):
 		knockback_tween.parallel().tween_property(
 			animation, "modulate", Color(1, 1, 1, 1), duration
 		)
+
+
+func _input(event):
+	if event is InputEventScreenTouch:
+		jump_common()
