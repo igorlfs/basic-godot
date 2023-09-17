@@ -11,6 +11,8 @@ var knockback_vector := Vector2.ZERO
 
 @onready var animation := $Anim as AnimatedSprite2D
 @onready var remote_transform := $Remote as RemoteTransform2D
+@onready var ray_right := $Ray_Right as RayCast2D
+@onready var ray_left := $Ray_Left as RayCast2D
 
 
 func _physics_process(delta: float) -> void:
@@ -39,13 +41,34 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		animation.play("idle")
 
+	if knockback_vector != Vector2.ZERO:
+		velocity = knockback_vector
+
 	move_and_slide()
 
 
-func _on_hurtbox_body_entered(body: Node2D) -> void:
-	if body.is_in_group("enemies"):
+func _on_hurtbox_body_entered(_body: Node2D) -> void:
+	if player_life < 0:
 		queue_free()
+	elif ray_right.is_colliding():
+		take_damage(Vector2(-200, -200))
+	elif ray_left.is_colliding():
+		take_damage(Vector2(200, -200))
 
 
 func follow_camera(camera: Camera2D) -> void:
 	remote_transform.remote_path = camera.get_path()
+
+
+func take_damage(knockback_force := Vector2.ZERO, duration := 0.25):
+	player_life -= 1
+
+	if knockback_force != Vector2.ZERO:
+		knockback_vector = knockback_force
+
+		var knockback_tween := get_tree().create_tween()
+		knockback_tween.parallel().tween_property(self, "knockback_vector", Vector2.ZERO, duration)
+		animation.modulate = Color(1, 0, 0, 1)
+		knockback_tween.parallel().tween_property(
+			animation, "modulate", Color(1, 1, 1, 1), duration
+		)
