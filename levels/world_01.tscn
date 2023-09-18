@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://b3krm4gysjt7s"]
+[gd_scene load_steps=26 format=3 uid="uid://b3krm4gysjt7s"]
 
 [ext_resource type="Script" path="res://scripts/world_01.gd" id="1_fj6ri"]
 [ext_resource type="Texture2D" uid="uid://bgw388cxl2m6p" path="res://assets/Seasonal Tilesets/1 - Grassland/Terrain (16 x 16).png" id="1_qx005"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://cnvot8an724m8" path="res://assets/Extras/ui_buttons_arrow_right_PRESSED.png" id="17_q7447"]
 [ext_resource type="Texture2D" uid="uid://8p0llgfd3msn" path="res://assets/Extras/ui_buttons_arrow_up_NORMAL.png" id="18_sbhw6"]
 [ext_resource type="Texture2D" uid="uid://e2muqv0hr0ng" path="res://assets/Extras/ui_buttons_arrow_up_PRESSED.png" id="19_tjryk"]
+[ext_resource type="PackedScene" uid="uid://pk3jqrvfjnqb" path="res://prefabs/breakable_box.tscn" id="20_s3y6d"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_uvaoy"]
 tile_data = PackedInt32Array(0, 65538, 1, 4, 327682, 1, 8, 65538, 1)
@@ -364,6 +365,7 @@ moving_horizontally = false
 position = Vector2(38, 223)
 
 [node name="Camera" type="Camera2D" parent="."]
+visible = false
 limit_left = -16
 limit_smoothed = true
 editor_draw_limits = true
@@ -376,13 +378,8 @@ position = Vector2(256, 224)
 [node name="Enemy2" parent="Enemies" instance=ExtResource("12_7joh7")]
 position = Vector2(384, 144)
 
-[node name="Enemy3" parent="Enemies" instance=ExtResource("12_7joh7")]
-position = Vector2(128, 139)
-
-[node name="Enemy4" parent="Enemies" instance=ExtResource("12_7joh7")]
-position = Vector2(205, 200)
-
 [node name="Controls" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="UI_Left" type="TouchScreenButton" parent="Controls"]
 position = Vector2(10, 120)
@@ -404,3 +401,9 @@ texture_normal = ExtResource("18_sbhw6")
 texture_pressed = ExtResource("19_tjryk")
 action = "ui_accept"
 visibility_mode = 1
+
+[node name="Breakable_Box" parent="." instance=ExtResource("20_s3y6d")]
+position = Vector2(124, 198)
+
+[node name="Breakable_Box2" parent="." instance=ExtResource("20_s3y6d")]
+position = Vector2(108, 198)
