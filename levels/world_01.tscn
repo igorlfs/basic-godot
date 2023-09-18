@@ -256,7 +256,7 @@ shader = ExtResource("6_rgku0")
 shader_parameter/move_speed = 0.05
 
 [node name="World-01" type="Node2D"]
-position = Vector2(3, 0)
+position = Vector2(4, 0)
 script = ExtResource("1_fj6ri")
 
 [node name="Level" type="TileMap" parent="."]
@@ -274,7 +274,6 @@ layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array(458737, 65538, 1, 393223, 65538, 1, 393227, 327682, 1, 393231, 65538, 1)
 
 [node name="BG" type="ParallaxBackground" parent="."]
-visible = false
 
 [node name="05" type="ParallaxLayer" parent="BG"]
 position = Vector2(6, -58)
