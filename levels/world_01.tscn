@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://b3krm4gysjt7s"]
+[gd_scene load_steps=27 format=3 uid="uid://b3krm4gysjt7s"]
 
 [ext_resource type="Script" path="res://scripts/world_01.gd" id="1_fj6ri"]
 [ext_resource type="Texture2D" uid="uid://bgw388cxl2m6p" path="res://assets/Seasonal Tilesets/1 - Grassland/Terrain (16 x 16).png" id="1_qx005"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://8p0llgfd3msn" path="res://assets/Extras/ui_buttons_arrow_up_NORMAL.png" id="18_sbhw6"]
 [ext_resource type="Texture2D" uid="uid://e2muqv0hr0ng" path="res://assets/Extras/ui_buttons_arrow_up_PRESSED.png" id="19_tjryk"]
 [ext_resource type="PackedScene" uid="uid://pk3jqrvfjnqb" path="res://prefabs/breakable_box.tscn" id="20_s3y6d"]
+[ext_resource type="PackedScene" uid="uid://cb3knqc75yxhj" path="res://prefabs/falling_platform.tscn" id="21_swnca"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_uvaoy"]
 tile_data = PackedInt32Array(0, 65538, 1, 4, 327682, 1, 8, 65538, 1)
@@ -330,6 +331,7 @@ texture = ExtResource("8_3egik")
 centered = false
 
 [node name="Coins" type="Node2D" parent="."]
+position = Vector2(3, 0)
 
 [node name="Coin" parent="Coins" instance=ExtResource("3_t4wbs")]
 position = Vector2(624, 216)
@@ -355,8 +357,16 @@ position = Vector2(64, 224)
 [node name="Coin7" parent="Coins" instance=ExtResource("3_t4wbs")]
 position = Vector2(120, 224)
 
+[node name="Falling Platforms" type="Node2D" parent="."]
+
+[node name="Falling_Platform" parent="Falling Platforms" instance=ExtResource("21_swnca")]
+position = Vector2(58, 208)
+
+[node name="Falling_Platform2" parent="Falling Platforms" instance=ExtResource("21_swnca")]
+position = Vector2(58, 167)
+
 [node name="Moving_Platform" parent="." instance=ExtResource("10_edgyo")]
-position = Vector2(56, 200)
+position = Vector2(299, 175)
 scale = Vector2(1.5, 1.5)
 distance = 100
 moving_horizontally = false
