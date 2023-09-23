@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://c577hmrwkq8nw"]
+
+[ext_resource type="Texture2D" uid="uid://djo8vjnc6y7nd" path="res://assets/brick-pieces/Dialog_Box(16 x 16).png" id="1_7ygrp"]
+[ext_resource type="Script" path="res://scripts/dialog_box.gd" id="1_woor7"]
+[ext_resource type="FontFile" uid="uid://dqvxx8ii0dl5s" path="res://assets/brick-pieces/RevMiniPixel.ttf" id="3_brmh6"]
+
+[node name="Dialog_Box" type="MarginContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(2.28188, 1.30464)
+script = ExtResource("1_woor7")
+
+[node name="Background" type="NinePatchRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_7ygrp")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Label_Margin" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Text_Label" type="Label" parent="Label_Margin"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_brmh6")
+theme_override_font_sizes/font_size = 8
+text = " "
+horizontal_alignment = 1
+
+[node name="Letter_Timer_Display" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Letter_Timer_Display" to="." method="_on_letter_timer_display_timeout"]
