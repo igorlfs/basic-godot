@@ -499,6 +499,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("26_ujrxu")
+default_seconds = 30
 
 [node name="MarginContainer" type="MarginContainer" parent="HUD/Control"]
 layout_mode = 1
@@ -607,4 +608,8 @@ theme_override_font_sizes/font_size = 8
 text = "03"
 vertical_alignment = 1
 
+[node name="Timer" type="Timer" parent="HUD/Control"]
+autostart = true
+
 [connection signal="body_entered" from="SpikeArea" to="SpikeArea" method="_on_body_entered"]
+[connection signal="timeout" from="HUD/Control/Timer" to="HUD/Control" method="_on_timer_timeout"]
