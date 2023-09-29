@@ -4,6 +4,7 @@ const SPEED = 700.0
 const JUMP_VELOCITY = -400.0
 
 @export var to_right := false
+@export var enemy_score := 100
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -32,4 +33,5 @@ func _physics_process(delta: float) -> void:
 
 func _on_anim_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "hurt":
+		Globals.score += enemy_score
 		queue_free()
