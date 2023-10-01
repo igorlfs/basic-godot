@@ -47,6 +47,21 @@ _data = {
 }
 point_count = 2
 
+[sub_resource type="Animation" id="Animation_xwsm4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path2D/PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
 [sub_resource type="Animation" id="Animation_mljv4"]
 resource_name = "patrol"
 loop_mode = 2
@@ -63,21 +78,6 @@ tracks/0/keys = {
 "values": [0.0, 1.0]
 }
 
-[sub_resource type="Animation" id="Animation_xwsm4"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Path2D/PathFollow2D:progress_ratio")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_764va"]
 _data = {
 "RESET": SubResource("Animation_xwsm4"),
@@ -87,15 +87,15 @@ _data = {
 [node name="BasePatrol" type="Node2D"]
 
 [node name="RocketCherry" type="CharacterBody2D" parent="."]
-position = Vector2(0, -96.9866)
+position = Vector2(0, -12)
 collision_layer = 4
 script = ExtResource("1_cx86t")
 
-[node name="anime" type="AnimatedSprite2D" parent="RocketCherry"]
+[node name="Anime" type="AnimatedSprite2D" parent="RocketCherry"]
 sprite_frames = SubResource("SpriteFrames_ja504")
 animation = &"flying"
 autoplay = "flying"
-frame_progress = 0.141951
+frame_progress = 0.971431
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RocketCherry"]
 position = Vector2(0.5, 6.5)
@@ -112,11 +112,11 @@ debug_color = Color(0.92549, 0.25098, 0.27451, 0.419608)
 curve = SubResource("Curve2D_p3ew2")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
-position = Vector2(0, -96.9866)
-progress = 98.0506
+position = Vector2(0, 1)
 rotates = false
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Path2D/PathFollow2D"]
+position = Vector2(0, -13)
 remote_path = NodePath("../../../RocketCherry")
 
 [node name="Marker2D" type="Marker2D" parent="."]
@@ -128,5 +128,4 @@ libraries = {
 "": SubResource("AnimationLibrary_764va")
 }
 
-[connection signal="animation_finished" from="RocketCherry/anime" to="RocketCherry" method="_on_anime_animation_finished"]
 [connection signal="body_entered" from="RocketCherry/Hitbox" to="RocketCherry" method="_on_hitbox_body_entered"]

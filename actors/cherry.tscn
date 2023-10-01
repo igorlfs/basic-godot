@@ -1,0 +1,64 @@
+[gd_scene load_steps=10 format=3 uid="uid://c362x1ojvgltp"]
+
+[ext_resource type="Script" path="res://scripts/cherry.gd" id="1_a2w2k"]
+[ext_resource type="Texture2D" uid="uid://bg3kdg8iqghi5" path="res://assets/Sprite Pack 2/7 - Rocket Cherry/Hopping (16 x 32).png" id="1_isy4t"]
+[ext_resource type="Texture2D" uid="uid://4281oyq6oium" path="res://assets/Sprite Pack 2/7 - Rocket Cherry/Hurt (16 x 32).png" id="2_7t0xo"]
+[ext_resource type="PackedScene" uid="uid://kjtx3b0y1ugi" path="res://prefabs/hitbox.tscn" id="3_0nn78"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2anbm"]
+size = Vector2(12, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sldyt"]
+atlas = ExtResource("1_isy4t")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bqavp"]
+atlas = ExtResource("1_isy4t")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gw30o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sldyt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bqavp")
+}],
+"loop": true,
+"name": &"hopping",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_7t0xo")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uxhx5"]
+size = Vector2(14, 2)
+
+[node name="Cherry" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_a2w2k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_2anbm")
+
+[node name="Anime" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_gw30o")
+animation = &"hopping"
+autoplay = "hopping"
+
+[node name="Hitbox" parent="." instance=ExtResource("3_0nn78")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(1, -12)
+shape = SubResource("RectangleShape2D_uxhx5")
+debug_color = Color(0.87451, 0.313726, 0.388235, 0.419608)

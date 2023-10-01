@@ -1,15 +1,10 @@
-extends CharacterBody2D
+extends EnemyBase
 
-@export var enemy_score := 150
-
-@onready var anime: AnimatedSprite2D = $anime
+@onready var marker_2d: Marker2D = $"../Marker2D"
 
 
-func _on_hitbox_body_entered(_body: Node2D) -> void:
-	anime.play("hurt")
-
-
-func _on_anime_animation_finished() -> void:
-	if anime.animation == "hurt":
-		queue_free()
-		Globals.score += enemy_score
+func _ready() -> void:
+	spawn_instance = preload("res://actors/cherry.tscn")
+	spawn_instance_position = marker_2d
+	can_spawn = true
+	anime.animation_finished.connect(kill_air_enemy)
