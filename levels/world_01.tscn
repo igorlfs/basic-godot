@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://b3krm4gysjt7s"]
+[gd_scene load_steps=49 format=3 uid="uid://b3krm4gysjt7s"]
 
 [ext_resource type="Script" path="res://scripts/world_01.gd" id="1_fj6ri"]
 [ext_resource type="Texture2D" uid="uid://bgw388cxl2m6p" path="res://assets/Seasonal Tilesets/1 - Grassland/Terrain (16 x 16).png" id="1_qx005"]
@@ -37,6 +37,7 @@
 [ext_resource type="FontFile" uid="uid://dqvxx8ii0dl5s" path="res://assets/brick-pieces/RevMiniPixel.ttf" id="30_21if4"]
 [ext_resource type="Texture2D" uid="uid://cc8uqst8vws56" path="res://assets/brick-pieces/Life-Counter-Icon.png" id="32_f1gqe"]
 [ext_resource type="PackedScene" uid="uid://cdhc8egabr62j" path="res://prefabs/checkpoint.tscn" id="37_muk2c"]
+[ext_resource type="PackedScene" uid="uid://bh7l87l7xaenh" path="res://prefabs/pause_menu.tscn" id="38_25wwt"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_uvaoy"]
 tile_data = PackedInt32Array(0, 65538, 1, 4, 327682, 1, 8, 65538, 1)
@@ -482,15 +483,12 @@ position = Vector2(-22.381, 4.05161)
 
 [node name="Checkpoints" type="Node2D" parent="."]
 position = Vector2(1212, 236)
-scale = Vector2(1, 1)
 
 [node name="Checkpoint" parent="Checkpoints" instance=ExtResource("37_muk2c")]
 position = Vector2(47, 3.99998)
-scale = Vector2(1, 1)
 
 [node name="Checkpoint2" parent="Checkpoints" instance=ExtResource("37_muk2c")]
-position = Vector2(-232, 3.99998)
-scale = Vector2(1, 1)
+position = Vector2(-233, 3.99998)
 
 [node name="Controls" type="CanvasLayer" parent="."]
 visible = false
@@ -680,6 +678,8 @@ vertical_alignment = 1
 
 [node name="Timer" type="Timer" parent="HUD/Control"]
 autostart = true
+
+[node name="PauseMenu" parent="." instance=ExtResource("38_25wwt")]
 
 [connection signal="body_entered" from="SpikeArea" to="SpikeArea" method="_on_body_entered"]
 [connection signal="timeout" from="HUD/Control/Timer" to="HUD/Control" method="_on_timer_timeout"]
