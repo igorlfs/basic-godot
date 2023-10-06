@@ -133,5 +133,10 @@ collision_mask = 64
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_fioxv")
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="body_entered" from="Head_Collider" to="." method="_on_head_collider_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -11,19 +11,26 @@ var is_jumping := false
 var knockback_vector := Vector2.ZERO
 var direction
 var is_hurt := false
+var can_jump := true
 
 @onready var animation := $Anim as AnimatedSprite2D
 @onready var remote_transform := $Remote as RemoteTransform2D
 @onready var ray_right := $Ray_Right as RayCast2D
 @onready var ray_left := $Ray_Left as RayCast2D
+@onready var timer: Timer = $Timer
 
 
 func jump_common():
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("ui_accept") and can_jump:
 		velocity.y = JUMP_FORCE
 		is_jumping = true
 	elif is_on_floor():
 		is_jumping = false
+
+	if is_on_floor() and !can_jump:
+		can_jump = true
+	elif can_jump and timer.is_stopped():
+		timer.start()
 
 
 func _physics_process(delta: float) -> void:
@@ -114,3 +121,7 @@ func _on_head_collider_body_entered(body: Node2D) -> void:
 		else:
 			body.animation_player.play("hit")
 			body.create_coin()
+
+
+func _on_timer_timeout() -> void:
+	can_jump = false
