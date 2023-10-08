@@ -12,6 +12,7 @@ var knockback_vector := Vector2.ZERO
 var direction
 var is_hurt := false
 var can_jump := true
+var current_trail: TrailEffect
 
 @onready var animation := $Anim as AnimatedSprite2D
 @onready var remote_transform := $Remote as RemoteTransform2D
@@ -47,6 +48,7 @@ func _physics_process(delta: float) -> void:
 	if direction:
 		velocity.x = direction * SPEED
 		animation.scale.x = direction
+		show_trail()
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
@@ -125,3 +127,8 @@ func _on_head_collider_body_entered(body: Node2D) -> void:
 
 func _on_timer_timeout() -> void:
 	can_jump = false
+
+
+func show_trail() -> void:
+	current_trail = TrailEffect.create_trail()
+	add_child(current_trail)
