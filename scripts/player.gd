@@ -19,12 +19,15 @@ var current_trail: TrailEffect
 @onready var ray_right := $Ray_Right as RayCast2D
 @onready var ray_left := $Ray_Left as RayCast2D
 @onready var timer: Timer = $Timer
+@onready var jump_sfx: AudioStreamPlayer = $AudioStreamPlayer
+@onready var destroy_sfx = preload("res://sounds/audio_stream_player.tscn")
 
 
 func jump_common():
 	if Input.is_action_just_pressed("ui_accept") and can_jump:
 		velocity.y = JUMP_FORCE
 		is_jumping = true
+		jump_sfx.play()
 	elif is_on_floor():
 		is_jumping = false
 
@@ -120,8 +123,10 @@ func _on_head_collider_body_entered(body: Node2D) -> void:
 		body.hit_points -= 1
 		if body.hit_points < 0:
 			body.break_sprite()
+			play_destroy_sfx()
 		else:
 			body.animation_player.play("hit")
+			body.hit_block_sfx.play()
 			body.create_coin()
 
 
@@ -132,3 +137,11 @@ func _on_timer_timeout() -> void:
 func show_trail() -> void:
 	current_trail = TrailEffect.create_trail()
 	add_child(current_trail)
+
+
+func play_destroy_sfx():
+	var sound_sfx = destroy_sfx.instantiate()
+	get_parent().add_child(sound_sfx)
+	sound_sfx.play()
+	await sound_sfx.finished
+	sound_sfx.queue_free()

@@ -9,6 +9,7 @@ const IMPULSE := 50
 
 @onready var animation_player := $Animation as AnimationPlayer
 @onready var spawn_coin = $Spawn_Coin as Marker2D
+@onready var hit_block_sfx: AudioStreamPlayer = $AudioStreamPlayer
 
 
 func break_sprite():

@@ -4,6 +4,7 @@ var coins := 1
 
 @onready var anim: AnimatedSprite2D = $Anim
 @onready var collision: CollisionShape2D = $Collision
+@onready var coin_sfx: AudioStreamPlayer = $AudioStreamPlayer
 
 
 # Called when the node enters the scene tree for the first time.
@@ -18,6 +19,7 @@ func _process(_delta: float) -> void:
 
 func _on_body_entered(_body: Node2D) -> void:
 	anim.play("collect")
+	coin_sfx.play()
 	# Evita colisão dupla
 	collision.queue_free()
 	Globals.coins += coins

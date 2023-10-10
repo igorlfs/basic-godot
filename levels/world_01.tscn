@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://b3krm4gysjt7s"]
+[gd_scene load_steps=55 format=3 uid="uid://b3krm4gysjt7s"]
 
 [ext_resource type="Script" path="res://scripts/world_01.gd" id="1_fj6ri"]
 [ext_resource type="Texture2D" uid="uid://bgw388cxl2m6p" path="res://assets/Seasonal Tilesets/1 - Grassland/Terrain (16 x 16).png" id="1_qx005"]
@@ -42,6 +42,7 @@
 [ext_resource type="Script" path="res://scripts/transition.gd" id="40_q45kr"]
 [ext_resource type="Shader" path="res://shaders/transition.gdshader" id="40_v5sid"]
 [ext_resource type="Script" path="res://scripts/color_rect.gd" id="41_xohp5"]
+[ext_resource type="AudioStream" uid="uid://d1k6ftiiwi3fa" path="res://sounds/bg_music.wav" id="43_g7k4m"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_uvaoy"]
 tile_data = PackedInt32Array(0, 65538, 1, 4, 327682, 1, 8, 65538, 1)
@@ -536,7 +537,7 @@ position = Vector2(67, -16)
 position = Vector2(124, 198)
 
 [node name="Breakable_Box2" parent="Breakable Boxes" instance=ExtResource("20_s3y6d")]
-position = Vector2(108, 198)
+position = Vector2(108, 197)
 
 [node name="Warning_Sign" type="Node2D" parent="."]
 position = Vector2(208, 200)
@@ -709,6 +710,11 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.0431373, 0.0431373, 0.0431373, 1)
 script = ExtResource("41_xohp5")
+
+[node name="BG_Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("43_g7k4m")
+volume_db = -12.0
+autoplay = true
 
 [connection signal="body_entered" from="SpikeArea" to="SpikeArea" method="_on_body_entered"]
 [connection signal="timeout" from="HUD/Control/Timer" to="HUD/Control" method="_on_timer_timeout"]
