@@ -584,7 +584,8 @@ offset_right = 2.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("26_ujrxu")
-default_seconds = 30
+default_minutes = 0
+default_seconds = 10
 
 [node name="MarginContainer" type="MarginContainer" parent="HUD/Control"]
 layout_mode = 1
@@ -715,6 +716,9 @@ script = ExtResource("41_xohp5")
 stream = ExtResource("43_g7k4m")
 volume_db = -12.0
 autoplay = true
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(940, 200)
 
 [connection signal="body_entered" from="SpikeArea" to="SpikeArea" method="_on_body_entered"]
 [connection signal="timeout" from="HUD/Control/Timer" to="HUD/Control" method="_on_timer_timeout"]

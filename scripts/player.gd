@@ -27,7 +27,7 @@ func jump_common():
 	if Input.is_action_just_pressed("ui_accept") and can_jump:
 		velocity.y = JUMP_FORCE
 		is_jumping = true
-		jump_sfx.play()
+		# jump_sfx.play()
 	elif is_on_floor():
 		is_jumping = false
 
